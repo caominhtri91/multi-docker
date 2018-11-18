@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t tricao/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t tricm/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run tricao/react-test yarn test -- --coverage
+  - docker run tricm/react-test yarn test -- --coverage
 
 after_success:
-  - docker build -t tricao/multi-client ./client
-  - docker build -t tricao/multi-nginx ./nginx
-  - docker build -t tricao/multi-server ./server
-  - docker build -t tricao/multi-worker ./worker
+  - docker build -t tricm/multi-client ./client
+  - docker build -t tricm/multi-nginx ./nginx
+  - docker build -t tricm/multi-server ./server
+  - docker build -t tricm/multi-worker ./worker
   # login to the docker cli
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push all images to docker hub
-  - docker push tricao/multi-client
-  - docker push tricao/multi-nginx
-  - docker push tricao/multi-server
-  - docker push tricao/multi-worker
+  - docker push tricm/multi-client
+  - docker push tricm/multi-nginx
+  - docker push tricm/multi-server
+  - docker push tricm/multi-worker
